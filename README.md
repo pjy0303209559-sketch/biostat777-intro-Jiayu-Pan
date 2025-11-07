@@ -10,7 +10,7 @@ This repository contains a personal introduction website built using **Quarto** 
 The website highlights who I am, my background, and a short portfolio section.
 
 ## Website URL
-https://https://github.com/pjy0303209559-sketcho/biostat777-intro--Jiayu---Pan-/
+ https://pjy0303209559-sketch.github.io/biostat777-intro-Jiayu-Pan/
 
 ## Technical Details
 - The website was created using **Quarto** with the `website` project type.
