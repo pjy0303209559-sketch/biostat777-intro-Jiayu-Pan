@@ -82,11 +82,94 @@ In summary, this analysis shows a clear upward trend in Taylor Swift’s album-l
 | `theme_minimal()` | ggplot2  | Applies a minimal theme to reduce visual clutter           |
 | `theme_classic()` | ggplot2  | Removes grid lines and applies a clean axis layout         |
 ## Results
+> taylor <- read.csv("C:/Users/EXILEHAA/my-site/data/taylor_swift_spotify.csv")
+> library(dplyr)
+> library(tidyr)
+> library(lubridate)
 
+
+ # ggsave("01_album_popularity_over_time.png", p1, width = 9, height = 5, dpi$
+> album_summary <- taylor %>%
++   select(name, album, release_date, popularity, danceability, energy, valenc$
++   mutate(release_year = year(as.Date(release_date))) %>%
++   drop_na(popularity) %>%
++   group_by(album, release_year) %>%
++   summarize(
++     avg_popularity   = mean(popularity, na.rm = TRUE),
++     avg_danceability = mean(danceability, na.rm = TRUE),
++     avg_energy       = mean(energy, na.rm = TRUE),
++     avg_valence      = mean(valence, na.rm = TRUE),
++     avg_acousticness = mean(acousticness, na.rm = TRUE),
++     .groups = "drop"
++   ) %>%
++   arrange(release_year)
+> head(album_summary)
+
+
+
+
+
+# A tibble: 6 × 7
+  album      release_year avg_popularity avg_danceability avg_energy avg_valence
+  <chr>             <dbl>          <dbl>            <dbl>      <dbl>       <dbl>
+1 Taylor Sw…         2006           56.7            0.545      0.664       0.427
+2 Fearless …         2008           32              0.571      0.636       0.393
+3 Fearless …         2008           43.2            0.576      0.600       0.380
+4 Live From…         2008           32.2            0.548      0.599       0.472
+5 Speak Now          2010           50.7            0.556      0.659       0.443
+6 Speak Now…         2010           48.4            0.559      0.659       0.430
+
+
+
+
+
+
+p1 <- ggplot(album_summary, aes(x = release_year, y = avg_popularity)) +
++   geom_line() +
++   geom_point(size = 2) +
++   geom_text_repel(aes(label = release_year), size = 4, nudge_y = 1) +
++   labs(
++     title = "Trends in Average Album Popularity Over Time",
++     x = "Year",
++     y = "Average Popularity (0–100)"
++   ) +
++   theme_classic()
 ![Trends in Average Album Popularity Over Time](images/taylor_album_popularity.png){fig-alt="Line plot of average album popularity by year" width=100%}
 
+
+
+
+> p2 <- album_summary %>%
++   group_by(album) %>%
++   summarize(avg_popularity = mean(avg_popularity, na.rm = TRUE), .groups = "$
++   ggplot(aes(x = reorder(album, avg_popularity), y = avg_popularity)) +
++   geom_col(fill = "#4A90E2") +      
++   coord_flip() +                     
++   labs(
++     title = "Average Album Popularity Comparison",
++     x = "Album",
++     y = "Average Popularity (0–100)"
++   ) +
++   theme_classic()  
 ![Average Album Popularity Comparison](images/taylor_feature_popularity_relationship.png){fig-alt="Bar chart comparing albums by average popularity" width=100%}
 
+
+
+
+
+ p3 <- ggplot(album_summary_long, aes(x = value, y = avg_popularity)) +
++   geom_point(alpha = 0.6) +
++   geom_smooth(method = "lm", se = TRUE, linewidth = 0.8, color = "black") +
++   facet_wrap(~ feature, scales = "free_x") +
++   labs(
++     title = "Relationships Between Audio Features and Album Popularity",
++     x = "Feature Value",
++     y = "Average Popularity (0–100)"
++   ) +
++   theme_classic() +                      
++   theme(
++     strip.background = element_blank(),  
++     strip.text = element_text(face = "bold")  
 ![Relationships Between Audio Features and Album Popularity](images/taylor_audio_features_comparison.png){fig-alt="Facet scatterplots of features vs popularity" width=100%}
 
 

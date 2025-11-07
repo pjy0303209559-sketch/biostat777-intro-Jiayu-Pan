@@ -21,10 +21,13 @@ website:
 
 format:
   html:
+    code-fold: true  
+    code-summary: "Code"           
+    code-tools: true         
+    code-copy: true         
     theme:
       - yeti
       - brand
-    css: styles.css
     toc: true
 bibliography: references.bib
 
