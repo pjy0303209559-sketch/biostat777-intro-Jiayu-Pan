@@ -1,0 +1,17 @@
+---
+title: "my-site"
+---
+
+Hi, I am Jiayu Pan. 
+I am a a Master of Health Science (MHS) student in Biochemistry and Molecular Biology at Johns Hopkins University. 
+I love traveling all around. Here are the pictures taken when I was traveling in different countries.
+
+### Britain
+![](images/IMG_4131.jpeg){fig-align="center" width=60% fig-cap="Etihad Stadium in Manchester"}
+
+### Italy
+![](images/IMG_4382.jpeg){fig-align="center" width=55% fig-cap="Leaning Tower of Pisa"}
+
+### Japan
+![](images/IMG_5425.jpeg){fig-align="center" width=65% fig-cap="Mount Fuji in Japan"}
+

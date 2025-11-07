@@ -1,0 +1,31 @@
+project:
+  type: website
+
+website:
+  title: "Jiayu Pan's Website"
+  navbar:
+    left:
+      - 
+        text: Home
+        href: index.qmd
+      - text: About
+        href: about.qmd
+      - text: Example analysis
+        href: analysis.qmd
+    right:
+      - icon: github
+        href: https://github.com/pjy0303209559-sketch
+  page-footer:
+    left: 2025 Jiayu Pan
+    right: Built with Quarto    
+
+format:
+  html:
+    theme:
+      - yeti
+      - brand
+    css: styles.css
+    toc: true
+bibliography: references.bib
+
+
